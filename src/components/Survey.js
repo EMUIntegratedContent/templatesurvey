@@ -1,19 +1,28 @@
 var React 		= require('react')
-var EntityType	= require('./EntityType')
+var ReactDOM  = require('react-dom')
+var Question_00	= require('./Question_00')
+var Question_01	= require('./Question_01')
+var Question_02	= require('./Question_02')
+var Question_03	= require('./Question_03')
+var Question_04	= require('./Question_04')
+var Question_05	= require('./Question_05')
+var Results		= require('./Results')
 var assign		= require('object-assign')
 var fetchUrl   	= require("fetch").fetchUrl
-var $	 		= require("jquery")
 
 var fieldValues = {
+	siteType: null,
+	doPostEvents: null,
+	doHaveHQPhotos: null,
+	doHaveStories: null,
 	name: null,
-	password: null,
 	email: null
 }
 
 var Survey = React.createClass({
   getInitialState: function() {
     return {
-      step : 1
+      step : 0
     }
   },
 
@@ -35,57 +44,49 @@ var Survey = React.createClass({
     })
   },
 
-  submitSurvey: function() {
-    // Handle via ajax submitting the user data, upon
-    // success return this.nextStop(). If it fails,
-    // show the user the error but don't advance
-
-	// source file is iso-8859-15 but it is converted to utf-8 automatically
-	/*
-	fetchUrl("http://webstage.emich.edu/templatesurvey/php/response.php", function(error, meta, body){
-	    console.log(body);
-	});
-	*/
-
-	// Submit form via jQuery/AJAX
-	  $.ajax({
-	    type: 'POST',
-	    url: 'http://webstage.emich.edu/templatesurvey/php/response.php',
-	    data: fieldValues
-	  })
-	  .done(function(data) {
-	    console.log("GOT HEEEEM!")
-	  })
-	  .fail(function(jqXhr) {
-	    console.log('failed to register');
-	  });
-  },
-
   showStep: function(){
 	switch (this.state.step) {
+	  case 0:
+        return <Question_00
+  			       nextStep={this.nextStep} />
       case 1:
-        return <EntityType fieldValues={fieldValues}
+        return <Question_01 fieldValues={fieldValues}
 			       nextStep={this.nextStep}
 			       previousStep={this.previousStep}
-			       saveValues={this.saveValues}
-				   submitSurvey={this.submitSurvey} />
+			       saveValues={this.saveValues} />
       case 2:
-        return 2
+	  	return <Question_02 fieldValues={fieldValues}
+				   nextStep={this.nextStep}
+				   previousStep={this.previousStep}
+				   saveValues={this.saveValues} />
       case 3:
-        return 3
+		return <Question_03 fieldValues={fieldValues}
+				   nextStep={this.nextStep}
+				   previousStep={this.previousStep}
+				   saveValues={this.saveValues}
+				   submitSurvey={this.submitSurvey} />
       case 4:
-        return 4
+	  	return <Question_04 fieldValues={fieldValues}
+				 nextStep={this.nextStep}
+				 previousStep={this.previousStep}
+				 saveValues={this.saveValues} />
+	  case 5:
+	    return <Question_05 fieldValues={fieldValues}
+				 nextStep={this.nextStep}
+				 previousStep={this.previousStep}
+				 saveValues={this.saveValues} />
+	  case 6:
+   	    return <Results fieldValues={fieldValues} />
     }
   },
 
   render: function() {
     var style = {
-      width : (this.state.step / 4 * 100) + '%'
+      width : (this.state.step / 6 * 100) + '%'
     }
 
     return (
       <main>
-        <span className="progress-step">Step {this.state.step}</span>
         <progress className="progress" style={style}></progress>
         {this.showStep()}
       </main>
