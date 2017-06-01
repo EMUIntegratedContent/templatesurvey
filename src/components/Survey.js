@@ -6,6 +6,7 @@ var Question_02	= require('./Question_02')
 var Question_03	= require('./Question_03')
 var Question_04	= require('./Question_04')
 var Question_05	= require('./Question_05')
+var Wrapup   	= require('./Wrapup')
 var Results		= require('./Results')
 var assign		= require('object-assign')
 var fetchUrl   	= require("fetch").fetchUrl
@@ -15,6 +16,7 @@ var fieldValues = {
 	doPostEvents: null,
 	doHaveHQPhotos: null,
 	doHaveStories: null,
+	doUseSocialMedia: null,
 	name: null,
 	email: null
 }
@@ -75,14 +77,20 @@ var Survey = React.createClass({
 				 nextStep={this.nextStep}
 				 previousStep={this.previousStep}
 				 saveValues={this.saveValues} />
+
 	  case 6:
+		return <Wrapup fieldValues={fieldValues}
+		   		  nextStep={this.nextStep}
+		   		  previousStep={this.previousStep}
+		   		  saveValues={this.saveValues} />
+	  case 7:
    	    return <Results fieldValues={fieldValues} />
     }
   },
 
   render: function() {
     var style = {
-      width : (this.state.step / 6 * 100) + '%'
+      width : (this.state.step / 7 * 100) + '%'
     }
 
     return (
