@@ -1,6 +1,7 @@
 var React	= require('react')
+var createReactClass = require('create-react-class');
 
-var Wrapup = React.createClass({
+var Wrapup = createReactClass({
 
     //Set initial state
     getInitialState: function () {
@@ -41,6 +42,10 @@ var Wrapup = React.createClass({
     if(this.refs.name.value != '' && this.refs.email.value != ''){
         this.setState({
             valid: true
+        })
+    } else {
+        this.setState({
+            valid: false
         })
     }
   },

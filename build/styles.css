@@ -4,6 +4,3 @@
 html{
     /*background-color: #00d1b2 !important;*/
 }
-progress::-moz-progress-bar { background: blue !important; }
-progress::-webkit-progress-value { background: blue !important; }
-progress { color: blue !important;

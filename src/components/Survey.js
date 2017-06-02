@@ -1,4 +1,5 @@
 var React 		= require('react')
+var createReactClass = require('create-react-class');
 var ReactDOM  = require('react-dom')
 var Question_00	= require('./Question_00')
 var Question_01	= require('./Question_01')
@@ -21,7 +22,7 @@ var fieldValues = {
 	email: null
 }
 
-var Survey = React.createClass({
+var Survey = createReactClass({
   getInitialState: function() {
     return {
       step : 0

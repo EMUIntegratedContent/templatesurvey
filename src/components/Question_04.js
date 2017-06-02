@@ -1,6 +1,7 @@
 var React	= require('react')
+var createReactClass = require('create-react-class');
 
-var Question_04 = React.createClass({
+var Question_04 = createReactClass({
     //Set initial state for radio options
     getInitialState: function () {
       return {
